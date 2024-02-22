@@ -1,12 +1,11 @@
 import { Event } from "../models/event.js";
 
 export const createEvent = async (req, res) => {
-  const { name, description, location,department } =
+  const { name, description,department } =
     req.body;
   if (
     !name ||
     !description ||
-    !location ||
     !department 
 
   ) {

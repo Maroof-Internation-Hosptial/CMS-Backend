@@ -6,7 +6,7 @@ const eventSchema = new mongoose.Schema(
     description: String,
     status: String,
     department: String,
-    location: String,
+    priority: String,
     date: Number,
     files: [],
     created_by: {
