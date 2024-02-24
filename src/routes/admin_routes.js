@@ -6,12 +6,14 @@ import {
 	eventsForCalender,
 	getEvents,
 	getSelectiveEvents,
+	getAssigneeEvents,
 	getMembers,
 	updateMember,
 } from "../controllers/admin_controller.js";
 
 routes.get("/events", getEvents);
 routes.get("/selective-events/:_id", protect, getSelectiveEvents);
+routes.get("/assignee-events", protect, getAssigneeEvents);
 routes.get("/events/calendar", protect, eventsForCalender);
 routes.get("/users", getMembers);
 routes.put("/users/:_id", updateMember);

@@ -2,6 +2,27 @@ import { Event } from "../models/event.js";
 import { User } from "../models/user.js";
 import randomColor from "randomcolor";
 
+export const getAssigneeEvents = async (req, res) => {
+	const { _id } = req.user;
+	try {
+		const events = await Event.find({
+			assignedTo: _id,
+		}).populate("created_by", "_id firstName lastName email image");
+		const statusOrder = {
+			success: 1,
+			"in-progress": 2,
+			upcoming: 3,
+			canceled: 4,
+		};
+		const sortedEvents = events.sort(
+			(a, b) => statusOrder[a.status] - statusOrder[b.status]
+		);
+		res.status(200).json(sortedEvents);
+	} catch (error) {
+		console.log(error);
+		res.status(400).json({ error: error.message });
+	}
+};
 export const getSelectiveEvents = async (req, res) => {
 	const { userdepartment } = req.user;
 	try {
