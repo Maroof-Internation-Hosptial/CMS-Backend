@@ -112,7 +112,6 @@ export const memberSignup = async (req, res) => {
   }
 };
 
-
 export const userEmailUpdate = async (req, res) => {
   const { new_email, _id } = req.body;
   if (!_id) {

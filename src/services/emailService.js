@@ -21,10 +21,12 @@ const sendVerificationEmail = async (email, data) => {
   const mailOptions = {
     from: "muawin@gmail.com",
     to: email,
-    subject: `${
-      data.length === 8 ? "MAROOF CMS" : "Verification Code"
-    }`,
-    html: `<h2>${data.length === 8 ? "Your Account has Successfully Created. Use the below mentioned Password to login" : "Code"}:</h2> ${data}`,
+    subject: `${data.length === 8 ? "MAROOF CMS" : "Verification Code"}`,
+    html: `<h5>${
+      data.length === 8
+        ? "Your Account has Successfully Created. Use the below mentioned Password to login"
+        : "Code"
+    }:</h5> ${data}`,
   };
 
   try {

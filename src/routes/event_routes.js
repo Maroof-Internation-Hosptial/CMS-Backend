@@ -3,15 +3,15 @@ const routes = express.Router();
 import { protect } from "../middleware/user_middleware.js";
 import multer from "multer";
 import {
-	addRating,
-	createEvent,
-	generateEvents,
-	generateUserPDF,
-	updateEvent,
+  addRating,
+  createEvent,
+  generateEvents,
+  generateUserPDF,
+  updateEvent,
 } from "../controllers/event_controller.js";
 import {
-	getUserEvents,
-	getSelectiveAssignee,
+  getUserEvents,
+  getSelectiveAssignee,
 } from "../controllers/global_controller.js";
 
 const storage = multer.memoryStorage();
