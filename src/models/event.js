@@ -3,10 +3,10 @@ import mongoose from "mongoose";
 const eventSchema = new mongoose.Schema(
   {
     complaint_id: {
-      // Add the complaint ID field
-      type: String,
-      unique: true, // Ensure uniqueness
+      type: Number,
+      unique: true,
     },
+
     name: String,
     description: String,
     status: String,
@@ -14,6 +14,7 @@ const eventSchema = new mongoose.Schema(
     priority: String,
     remarks: String,
     date: Number,
+    resolvedAt: String,
     files: [],
     created_by: {
       type: mongoose.Schema.Types.ObjectId,

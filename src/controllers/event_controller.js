@@ -1,14 +1,8 @@
 import { Event } from "../models/event.js";
 
 export const createEvent = async (req, res) => {
-  const { name, description,department } =
-    req.body;
-  if (
-    !name ||
-    !description ||
-    !department 
-
-  ) {
+  const { name, description, department } = req.body;
+  if (!name || !description || !department) {
     return res.status(422).json({ error: "please fill all fields " });
   }
   try {
