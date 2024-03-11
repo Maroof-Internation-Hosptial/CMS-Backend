@@ -14,6 +14,7 @@ const eventSchema = new mongoose.Schema(
     priority: String,
     remarks: String,
     date: Number,
+    resolvedAt: String,
     files: [],
     created_by: {
       type: mongoose.Schema.Types.ObjectId,
