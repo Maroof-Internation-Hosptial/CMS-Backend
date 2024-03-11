@@ -25,9 +25,11 @@ export const getCities = async (req, res) => {
 
 export const getSelectiveAssignee = async (req, res) => {
 	const { userdepartment } = req.user;
-	const role = "complaint-assignee";
 	try {
-		const response = await User.find({ role, userdepartment }).sort({
+		const response = await User.find({
+			$or: [{ role: "complaint-assignee" }, { role: "dept-manager" }],
+			userdepartment,
+		}).sort({
 			firstName: 1,
 		});
 		// const response = "good";
@@ -87,6 +89,81 @@ export const getTodos = async (req, res) => {
 	}
 };
 
+export const getAssigneeCompCount = async (req, res) => {
+	try {
+		const totalCount = await Event.countDocuments({
+			assignedTo: req.user._id,
+		});
+		const openCount = await Event.countDocuments({
+			assignedTo: req.user._id,
+			status: "in-progress",
+		});
+		const cancelledCount = await Event.countDocuments({
+			assignedTo: req.user._id,
+			status: "canceled",
+		});
+		const closedCount = await Event.countDocuments({
+			assignedTo: req.user._id,
+			status: "resolved",
+		});
+		res
+			.status(200)
+			.json({ totalCount, openCount, cancelledCount, closedCount });
+	} catch (error) {
+		console.log(error);
+		res.status(400).json({ error: error.message });
+	}
+};
+export const getUserCompCount = async (req, res) => {
+	try {
+		const totalCount = await Event.countDocuments({
+			created_by: req.user._id,
+		});
+		const openCount = await Event.countDocuments({
+			created_by: req.user._id,
+			status: "in-progress",
+		});
+		const cancelledCount = await Event.countDocuments({
+			created_by: req.user._id,
+			status: "canceled",
+		});
+		const closedCount = await Event.countDocuments({
+			created_by: req.user._id,
+			status: "resolved",
+		});
+		res
+			.status(200)
+			.json({ totalCount, openCount, cancelledCount, closedCount });
+	} catch (error) {
+		console.log(error);
+		res.status(400).json({ error: error.message });
+	}
+};
+export const getDeptCount = async (req, res) => {
+	try {
+		const totalCount = await Event.countDocuments({
+			department: req.user.userdepartment,
+		});
+		const openCount = await Event.countDocuments({
+			department: req.user.userdepartment,
+			status: "in-progress",
+		});
+		const cancelledCount = await Event.countDocuments({
+			department: req.user.userdepartment,
+			status: "canceled",
+		});
+		const closedCount = await Event.countDocuments({
+			department: req.user.userdepartment,
+			status: "resolved",
+		});
+		res
+			.status(200)
+			.json({ totalCount, openCount, cancelledCount, closedCount });
+	} catch (error) {
+		console.log(error);
+		res.status(400).json({ error: error.message });
+	}
+};
 export const getTodosCount = async (req, res) => {
 	try {
 		const count = await Todo.countDocuments({

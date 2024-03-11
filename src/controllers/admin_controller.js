@@ -29,7 +29,10 @@ export const getSelectiveEvents = async (req, res) => {
 		const events = await Event.find({
 			is_active: true,
 			department: userdepartment,
-		}).populate("created_by", "_id firstName lastName email image");
+		}).populate(
+			"created_by",
+			"_id firstName lastName email image userdepartment"
+		);
 		const statusOrder = {
 			success: 1,
 			"in-progress": 2,
