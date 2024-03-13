@@ -15,6 +15,7 @@ const eventSchema = new mongoose.Schema(
     remarks: String,
     date: Number,
     resolvedAt: String,
+    nature: String,
     files: [],
     created_by: {
       type: mongoose.Schema.Types.ObjectId,
