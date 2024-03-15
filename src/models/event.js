@@ -10,6 +10,8 @@ const eventSchema = new mongoose.Schema(
     name: String,
     description: String,
     status: String,
+    timing: String,
+    deadline: String,
     department: String,
     priority: String,
     remarks: String,
